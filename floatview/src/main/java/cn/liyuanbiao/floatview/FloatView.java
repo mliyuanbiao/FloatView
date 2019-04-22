@@ -234,6 +234,8 @@ public final class FloatView {
                                 if (Math.sqrt(Math.pow(absX, 2) +
                                         Math.pow(absY, 2)) > touchSlop) {
                                     return true;
+                                } else if (v.performClick()) {
+                                    return true;
                                 }
                                 break;
                             }
@@ -249,6 +251,7 @@ public final class FloatView {
             super.onActivityPaused(activity);
             View view = activityViewWeakHashMap.remove(activity);
             if (view != null) {
+                view.setOnClickListener(null);
                 ViewGroup viewGroup = (ViewGroup) view.getParent();
                 if (viewGroup != null) {
                     viewGroup.removeView(view);
